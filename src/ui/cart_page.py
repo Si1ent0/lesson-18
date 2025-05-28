@@ -5,7 +5,6 @@ from selene import browser, have
 
 
 class Cart:
-
     @allure.story('Открытие главной страницы')
     def open_main_page(self, cookie):
         with allure.step('Открытие браузера'):

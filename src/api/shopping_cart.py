@@ -5,10 +5,6 @@ from allure_commons.types import AttachmentType
 
 
 class Product:
-
-    def __init__(self):
-        self.cookie = None
-
     @allure.step("API. Проверка успешной авторизации.")
     def test_successful_login_api(self, api_url, login_credentials):
         username, password = login_credentials
