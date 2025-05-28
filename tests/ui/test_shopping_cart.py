@@ -13,6 +13,8 @@ from data.data import ITEM, ITEM_NAME
 @allure.link("https://demowebshop.tricentis.com/cart", name="main page")
 @allure.story('Добавление товара в тележку')
 def test_add_item_in_cart (ui_url, api_url, login_credentials):
-        cookie = product.add_item(api_url, ITEM)
-        cart.open_main_page(cookie)
+        cookies = product.test_successful_login_api(api_url, login_credentials)
+        header = {'Cookie': f'NOPCOMMERCE.AUTH={cookies}'}
+        product.add_item(api_url, ITEM, headers=header)
+        cart.open_main_page(cookies)
         cart.check_add_product(ITEM_NAME)

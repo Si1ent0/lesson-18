@@ -28,17 +28,17 @@ class Product:
         return self.cookie
 
     @allure.story('Добавление items в тележку')
-    def add_item(self, api_url, item_id):
+    def add_item(self, api_url, item_id, headers):
 
         url = api_url + '/addproducttocart/catalog/' + item_id
         with allure.step('Добавление item в тележку'):
-            response = requests.post(url)
+            response = requests.post(url, headers=headers)
         allure.attach(body=response.text, name="Response", attachment_type=AttachmentType.TEXT, extension="txt")
         allure.attach(body=str(response.cookies), name="Cookies", attachment_type=AttachmentType.TEXT, extension="txt")
         with allure.step('Проверка кода'):
             assert response.status_code == 200
 
-        return response.cookies.get("Nop.customer")
+        return response.cookies.get("NOPCOMMERCE.AUTH")
 
 
 product = Product()
